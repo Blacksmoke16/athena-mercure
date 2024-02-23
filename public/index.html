@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script type="application/javascript">
+  fetch('http://localhost:3000/book/1')
+    .then(response => {
+      // Parse the hubUrl from the Link header
+      const hubUrl = response.headers.get('Link').match(/<([^>]+)>;\s+rel=(?:mercure|"[^"]*mercure[^"]*")/)[1];
+
+      // Denote we want to subscribe to the topic related to this book
+      const url = new URL(hubUrl);
+      url.searchParams.append('topic', 'https://example.com/book/1');
+
+      const eventSource = new EventSource(url, { withCredentials: true });
+
+      // Log out each message from the event source
+      console.log('listening...');
+      eventSource.onmessage = e => console.log(e);
+    });
+</script>
+
+</body>
+</html>

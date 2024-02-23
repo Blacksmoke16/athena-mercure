@@ -1,0 +1,13 @@
+name: athena-mercure
+version: 0.1.0
+
+description: |
+  Proof of concept Athena Mercure integration
+
+dependencies:
+  athena:
+    github: athena-framework/framework
+    version: ~> 0.18.0
+  jwt:
+    github: crystal-community/jwt
+    version: ~> 1.6
